@@ -9,6 +9,12 @@ class TincAT11 < Formula
 
   uses_from_macos "zlib"
 
+  # fix openssl usage
+  patch do
+    url "https://raw.githubusercontent.com/xen0n/homebrew-tinc-1.1/fd288b7fb2ae1d00970d0f6676d7ba2eae68601b/patches/0025-fix-use-EVP_DecryptUpdate-while-decrypting.patch"
+    sha256 "57dc7938ae31467da5bc7d139d0ec118c5e3e81809b00f9321c5fefbe1dae3c5"
+  end
+
   def install
     system "./configure", "--prefix=#{prefix}", "--sysconfdir=#{etc}",
                           "--with-openssl=#{Formula["openssl@1.1"].opt_prefix}"
